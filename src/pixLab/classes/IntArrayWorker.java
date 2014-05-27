@@ -16,6 +16,57 @@ public class IntArrayWorker
 		matrix = theMatrix;
 	}
 
+	public int getLargest()
+	{
+
+		int largestValue = 0;
+		for (int row = 0; row < matrix.length; row++)
+		{
+			for (int col = 0; col < matrix[0].length; col++)
+			{
+				if (matrix[row][col] < largestValue)
+					largestValue = matrix[row][col];
+
+			}
+		}
+
+		return largestValue;
+	}
+
+	public int getCount(int findNum)
+	{
+		int count = 0;
+		for (int row = 0; row < matrix.length; row++)
+		{
+			for (int col = 0; col < matrix[0].length; col++)
+			{
+				if (matrix[row][col] == findNum)
+				{
+					count++;
+				}
+			}
+		}
+
+		return count;
+	}
+
+	public int getColTotal(int findIntegers)
+	{
+		int totalIntegers = 0;
+		for (int row = 0; row < matrix.length; row++)
+		{
+			for (int col = 0; col < matrix[0].length; col++)
+			{
+				if (matrix[row][col] == findIntegers)
+				{
+					totalIntegers++;
+				}
+			}
+		}
+
+		return totalIntegers;
+	}
+
 	/**
 	 * Method to return the total
 	 * 

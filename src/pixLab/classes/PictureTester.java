@@ -9,6 +9,7 @@ package pixLab.classes;
  */
 public class PictureTester
 {
+
 	/** Method to test zeroBlue */
 	public static void testZeroBlue()
 	{
@@ -16,6 +17,16 @@ public class PictureTester
 		beach.explore();
 		beach.zeroBlue();
 		beach.explore();
+
+	}
+
+	public static void testKeepOnlyBlue()
+	{
+		Picture bike = new Picture("redMotorcycle.jpg");
+		bike.explore();
+		bike.KeepOnlyBlue();
+		bike.explore();
+
 	}
 
 	/** Method to test mirrorVertical */
@@ -52,6 +63,25 @@ public class PictureTester
 		swan.explore();
 	}
 
+	public static void testGrayscale()
+	{
+	 Picture temple = new Picture("temple.jpg");
+	 temple.grayScale();
+	 temple.explore();
+	}
+	public static void testNegate()
+	{
+		Picture water = new Picture("water.jpg");
+		water.negate();
+		water.explore();
+	}
+	public static void testFixUnderwater()
+	{
+		Picture water = new Picture("water.jpg");
+		water.fixUnderwater();
+		water.explore();
+	}
+
 	/**
 	 * Main method for testing. Every class can have a main method in Java
 	 */
@@ -60,13 +90,13 @@ public class PictureTester
 		// uncomment a call here to run a test
 		// and comment out the ones you don't want
 		// to run
-		testZeroBlue();
-		// testKeepOnlyBlue();
+		//testZeroBlue();
+		//testKeepOnlyBlue();
 		// testKeepOnlyRed();
 		// testKeepOnlyGreen();
-		// testNegate();
-		// testGrayscale();
-		// testFixUnderwater();
+		//testNegate();
+		//testGrayscale();
+		testFixUnderwater();
 		// testMirrorVertical();
 		// testMirrorTemple();
 		// testMirrorArms();
@@ -83,4 +113,5 @@ public class PictureTester
 		// testClearBlueOverValue(200);
 		// testGetAverageForColumn(0);
 	}
+
 }

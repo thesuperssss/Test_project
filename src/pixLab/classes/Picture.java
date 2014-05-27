@@ -1,4 +1,5 @@
 package pixLab.classes;
+
 import java.awt.*;
 import java.awt.font.*;
 import java.awt.geom.*;
@@ -8,8 +9,7 @@ import java.util.*;
 import java.util.List; // resolves problem with java.awt.List and java.util.List
 
 /**
- * A class that represents a picture. This class inherits from SimplePicture and
- * allows the student to add functionality to the Picture class.
+ * A class that represents a picture. This class inherits from SimplePicture and allows the student to add functionality to the Picture class.
  * 
  * @author Barbara Ericson ericson@cc.gatech.edu
  */
@@ -23,8 +23,7 @@ public class Picture extends SimplePicture
 	public Picture()
 	{
 		/*
-		 * not needed but use it to show students the implicit call to super()
-		 * child constructors always call a parent constructor
+		 * not needed but use it to show students the implicit call to super() child constructors always call a parent constructor
 		 */
 		super();
 	}
@@ -83,12 +82,12 @@ public class Picture extends SimplePicture
 	/**
 	 * Method to return a string with information about this picture.
 	 * 
-	 * @return a string with information about the picture such as fileName,
-	 *         height and width.
+	 * @return a string with information about the picture such as fileName, height and width.
 	 */
 	public String toString()
 	{
-		String output = "Picture, filename " + getFileName() + " height " + getHeight() + " width " + getWidth();
+		String output = "Picture, filename " + getFileName() + " height "
+				+ getHeight() + " width " + getWidth();
 		return output;
 
 	}
@@ -106,9 +105,21 @@ public class Picture extends SimplePicture
 		}
 	}
 
+	public void KeepOnlyBlue()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] currentRow : pixels)
+		{
+			for (Pixel currentPixel : currentRow)
+			{
+				currentPixel.setGreen(0);
+				currentPixel.setRed(0);
+			}
+		}
+	}
+
 	/**
-	 * Method that mirrors the picture around a vertical mirror in the center of
-	 * the picture from left to right
+	 * Method that mirrors the picture around a vertical mirror in the center of the picture from left to right
 	 */
 	public void mirrorVertical()
 	{
@@ -151,8 +162,7 @@ public class Picture extends SimplePicture
 	}
 
 	/**
-	 * copy from the passed fromPic to the specified startRow and startCol in
-	 * the current picture
+	 * copy from the passed fromPic to the specified startRow and startCol in the current picture
 	 * 
 	 * @param fromPic
 	 *            the picture to copy from
@@ -167,9 +177,11 @@ public class Picture extends SimplePicture
 		Pixel toPixel = null;
 		Pixel[][] toPixels = this.getPixels2D();
 		Pixel[][] fromPixels = fromPic.getPixels2D();
-		for (int fromRow = 0, toRow = startRow; fromRow < fromPixels.length && toRow < toPixels.length; fromRow++, toRow++)
+		for (int fromRow = 0, toRow = startRow; fromRow < fromPixels.length
+				&& toRow < toPixels.length; fromRow++, toRow++)
 		{
-			for (int fromCol = 0, toCol = startCol; fromCol < fromPixels[0].length && toCol < toPixels[0].length; fromCol++, toCol++)
+			for (int fromCol = 0, toCol = startCol; fromCol < fromPixels[0].length
+					&& toCol < toPixels[0].length; fromCol++, toCol++)
 			{
 				fromPixel = fromPixels[fromRow][fromCol];
 				toPixel = toPixels[toRow][toCol];
@@ -218,6 +230,51 @@ public class Picture extends SimplePicture
 					leftPixel.setColor(Color.BLACK);
 				else
 					leftPixel.setColor(Color.WHITE);
+			}
+		}
+	}
+
+	public void negate()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] currentRow : pixels)
+		{
+			for (Pixel currentPixel : currentRow)
+			{
+				currentPixel.setGreen(255- currentPixel.getGreen());
+				currentPixel.setRed(255-currentPixel.getRed());
+				currentPixel.setBlue(255-currentPixel.getBlue());
+			}
+		}
+	}
+	public void grayScale()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] currentRow : pixels)
+		{
+			for (Pixel currentPixel : currentRow)
+			{
+				currentPixel.setGreen((currentPixel.getGreen()+currentPixel.getRed()+currentPixel.getBlue())/3);
+				currentPixel.setRed((currentPixel.getGreen()+currentPixel.getRed()+currentPixel.getBlue())/3);
+				currentPixel.setBlue((currentPixel.getGreen()+currentPixel.getRed()+currentPixel.getBlue())/3);
+			}
+		}	
+	}
+	public void fixUnderwater()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] currentRow : pixels)
+		{
+			for (Pixel currentPixel : currentRow)
+			{
+				currentPixel.setGreen((currentPixel.getGreen()+currentPixel.getRed()+currentPixel.getBlue())/3);
+				currentPixel.setRed((currentPixel.getGreen()+currentPixel.getRed()+currentPixel.getBlue())/3);
+				currentPixel.setBlue((currentPixel.getGreen()+currentPixel.getRed()+currentPixel.getBlue())/3);			
+				if(currentPixel.getGreen()>110&&currentPixel.getBlue()>125&&(currentPixel.getGreen()+currentPixel.getRed()+currentPixel.getBlue())/3>110)
+				{	
+					currentPixel.setRed(255);				
+				}
+
 			}
 		}
 	}
